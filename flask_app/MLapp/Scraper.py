@@ -7,16 +7,13 @@ import bs4 as bs
 import numpy as np
 
 
-class Scrapper:
+class Scraper:
     def __init__(self, args):
         self.train_dir = args.train_dir
         self.val_dir = args.val_dir
         self.test_dir = args.test_dir
         self.labels = args.labels
         self.multi_label_queries = args.queries
-        self.n_train_samples = args.n_train_samples
-        self.n_val_samples = args.n_val_samples
-        self.n_test_samples = args.n_test_samples
 
     def build_dataset(self):
         for single_label_queries in self.multi_label_queries:
@@ -59,21 +56,15 @@ class Scrapper:
                         f = open(os.path.join(DIR, image_name), 'wb')
                         f.write(raw_img)
                         f.close()
-                        if type == 'train':
-                            self.n_train_samples += 1
-                        elif type == 'val':
-                            self.n_val_samples += 1
-                        else:
-                            self.n_test_samples += 1
                     except Exception as e:
-                        logging.warning("could not load : " + image_name)
-                        logging.warning(e)
+                        logging.info("could not load : " + image_name)
+                        logging.info(e)
 
-            logging.warning('Done for ' + label)
+            logging.info('Done for ' + label)
 
-            logging.warning("Total images : " + str(total_images))
+            logging.info("Total images : " + str(total_images))
 
-        logging.warning("All done")
+        logging.info("All done")
 
     def get_soup(self, url, header):
         return bs.BeautifulSoup(urllib.request.urlopen(
@@ -85,6 +76,6 @@ class Scrapper:
         if (a <= 0.7):
             return self.train_dir + label, 'train'
         elif (a > 0.97):
-            return self.test_dir + 'cvkvp', 'test'
+            return self.test_dir + 'mixed', 'test'
         else:
             return self.val_dir + label, 'val'
