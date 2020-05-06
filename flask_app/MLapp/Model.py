@@ -27,8 +27,8 @@ class Model:
         self.datagen = ImageDataGenerator(rescale=1. / 255)
         self.backbone = applications.vgg16.VGG16(include_top=False, weights='imagenet',
                                                  input_tensor=None, input_shape=(self.img_width, self.img_height, 3))
-        self.model_weights_file = 'model_weights.h5'
-        self.model_file = 'model.h5'
+        self.model_weights_file = args.model_weights_file
+        self.model_file = args.model_file
         self.history = None
         self.model = None
 

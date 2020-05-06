@@ -8,17 +8,22 @@ docker-compose up --build
 
 After deploying, start to scrape images (~10 mins) and build a training dataset:
 ```shell script
-curl curl  http://localhost:5002/scrape
+curl  http://localhost:5002/scrape
 ```
 
 Then train the model (~10 mins):
 ```shell script
-curl curl  http://localhost:5002/train
+curl  http://localhost:5002/train
 ```
 
-Finally, play with your own images:
+Play with your own images:
 ```shell script
 curl -F 'file=@path/picture.jpg' http://localhost:5002/predict
+```
+
+Finally, download your model:
+```shell script
+curl http://localhost:5002/export --output some_file.h5
 ```
 
 
