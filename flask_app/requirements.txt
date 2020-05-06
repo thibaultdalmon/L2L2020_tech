@@ -3,5 +3,5 @@ numpy
 beautifulsoup4
 tensorflow<2.0.0
 gunicorn>=19.7.1
-keras
-pandas
+gevent
+pillow

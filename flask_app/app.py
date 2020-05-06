@@ -15,7 +15,7 @@ class Argument:
 
 args = Argument()
 
-workspace_dir = '../'
+workspace_dir = '/usr/src/'
 data_dir = workspace_dir + 'data_afo/'
 args.train_dir = data_dir + 'train/'
 args.val_dir = data_dir + 'val/'
@@ -86,7 +86,7 @@ def predict():
 
         model = Model(args)
         predicted_class, score = model.predict(os.path.join(args.test_dir, filename))
-        return jsonify({'predicted class': int(predicted_class), 'score': float(score)})
+        return jsonify({'predicted class': args.labels[int(predicted_class)], 'score': float(score)})
 
 
 if __name__ == '__main__':
